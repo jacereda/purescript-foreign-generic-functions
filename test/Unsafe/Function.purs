@@ -1,7 +1,5 @@
 module Test.Unsafe.Function where
 
-import Prelude
-
 import Data.Foreign.Unsafe.Function (mkFunc1, mkFunc2)
 import Jack (Property, forAll, (===))
 import Test.Fruit (Fruit, genFruit)

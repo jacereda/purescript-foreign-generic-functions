@@ -1,9 +1,5 @@
 module Test.Unsafe.Callback where
 
-import Prelude
-
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, logShow)
 import Data.Foreign.Class (class Decode, class Encode)
 import Data.Foreign.Unsafe.Callback (CB1, CB2, mkCB1, mkCB2)
 import Data.Foreign.Unsafe.Function (mkFunc2, mkFunc3)
@@ -17,11 +13,6 @@ testCB1Unsafe = mkFunc2 testCB1Impl
 
 testCB2Unsafe :: CB2 Fruit Fruit (Array Fruit) -> Fruit -> Fruit -> Array Fruit
 testCB2Unsafe = mkFunc3 testCB2Impl
-
-effCB1 :: forall e. Fruit -> Eff (console :: CONSOLE | e) Fruit
-effCB1 f = do
-  logShow f
-  pure f
 
 prop_cb1_works :: Property
 prop_cb1_works =
