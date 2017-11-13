@@ -2,17 +2,12 @@ module Test.Fruit where
 
 import Prelude
 
-import Data.Either (Either)
-import Data.Foreign (MultipleErrors)
 import Data.Foreign.Class (class Decode, class Encode)
-import Data.Foreign.Function (mkFunc1)
 import Data.Foreign.Generic (defaultOptions, genericDecode, genericEncode)
-import Data.Foreign.Unsafe.Function as Unsafe
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Eq (genericEq)
 import Data.Generic.Rep.Show (genericShow)
 import Jack (Gen, elements)
-import Test.JS (fruitIdImpl)
 
 data Fruit = Apple
            | Banana

@@ -21,5 +21,3 @@ instance encodeCB1 :: (Decode a, Encode b) => Encode (CB1 a b) where
 
 instance encodeCB2 :: (Decode a, Decode b, Encode c) => Encode (CB2 a b c) where
   encode (CB2 f) = toForeign $ mkFn2 \a b -> encode $ runFn2 f (unsafeDecode a) (unsafeDecode b)
-
-

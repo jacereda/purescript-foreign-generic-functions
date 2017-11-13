@@ -12,9 +12,9 @@ import Data.Newtype (class Newtype, un)
 newtype Func1 a b = Func1 (Fn1 a b)
 newtype Func2 a b c = Func2 (Fn2 a b c)
 newtype Func3 a b c d = Func3 (Fn3 a b c d)
-derive instance unewtypeFunc1 :: Newtype (Func1 a b) _
-derive instance unewtypeFunc2 :: Newtype (Func2 a b c) _
-derive instance unewtypeFunc3 :: Newtype (Func3 a b c d) _
+derive instance newtypeFunc1 :: Newtype (Func1 a b) _
+derive instance newtypeFunc2 :: Newtype (Func2 a b c) _
+derive instance newtypeFunc3 :: Newtype (Func3 a b c d) _
 
 decodeFunc1 :: forall a b. Encode a => Decode b => Foreign -> Func1 a b
 decodeFunc1 f = Func1 $ \a -> unsafeDecode $ (unsafeFromForeign f) (encode a)
