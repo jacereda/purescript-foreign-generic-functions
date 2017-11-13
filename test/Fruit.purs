@@ -27,11 +27,5 @@ instance decodeFruit :: Decode Fruit where decode = genericDecode defaultOptions
 genFruit :: Gen Fruit
 genFruit = elements [ Apple, Banana, Orange ]
 
-fruitIdSafe :: Fruit -> Either MultipleErrors Fruit
-fruitIdSafe = mkFunc1 fruitIdImpl
-
-fruitIdUnsafe :: Fruit -> Fruit
-fruitIdUnsafe = Unsafe.mkFunc1 fruitIdImpl
-
 fruitPair :: Fruit -> Fruit -> Array Fruit
 fruitPair a b = [a, b]
