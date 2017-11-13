@@ -11,4 +11,5 @@ main :: forall e. Eff (random :: RANDOM, console :: CONSOLE | e) Unit
 main = jackMain [ "Test.Function"
                 , "Test.Unsafe.Function"
                 , "Test.Unsafe.Callback"
+                , "Test.Unsafe.Eff.Function"
                 ]
