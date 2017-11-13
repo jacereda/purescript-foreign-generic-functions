@@ -25,12 +25,12 @@ decodeFunc2 f = Func2 $ mkFn2 \a b -> unsafeDecode $ runFn2 (unsafeFromForeign f
 decodeFunc3 :: forall a b c d. Encode a => Encode b => Encode c => Decode d => Foreign -> Func3 a b c d
 decodeFunc3 f = Func3 $ mkFn3 \a b c -> unsafeDecode $ runFn3 (unsafeFromForeign f) (encode a) (encode b) (encode c)
 
-mkFunc1 :: forall a b. Encode a => Decode b => Foreign -> (a -> b)
-mkFunc1 f = un Func1 (decodeFunc1 f)
+wrap1 :: forall a b. Encode a => Decode b => Foreign -> (a -> b)
+wrap1 f = un Func1 (decodeFunc1 f)
 
-mkFunc2 :: forall a b c. Encode a => Encode b => Decode c => Foreign -> (a -> b -> c)
-mkFunc2 f = runFn2 $ un Func2 (decodeFunc2 f)
+wrap2 :: forall a b c. Encode a => Encode b => Decode c => Foreign -> (a -> b -> c)
+wrap2 f = runFn2 $ un Func2 (decodeFunc2 f)
 
-mkFunc3 :: forall a b c d. Encode a => Encode b => Encode c => Decode d => Foreign -> (a -> b -> c -> d)
-mkFunc3 f = runFn3 $ un Func3 (decodeFunc3 f)
+wrap3 :: forall a b c d. Encode a => Encode b => Encode c => Decode d => Foreign -> (a -> b -> c -> d)
+wrap3 f = runFn3 $ un Func3 (decodeFunc3 f)
 

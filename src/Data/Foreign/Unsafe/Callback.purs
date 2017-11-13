@@ -10,11 +10,11 @@ import Data.Function.Uncurried (Fn1, Fn2, mkFn2, runFn2)
 newtype CB1 a b = CB1 (Fn1 a b)
 newtype CB2 a b c = CB2 (Fn2 a b c)
 
-mkCB1 :: forall a b. (a -> b) -> CB1 a b
-mkCB1 = CB1
+wrap1 :: forall a b. (a -> b) -> CB1 a b
+wrap1 = CB1
 
-mkCB2 :: forall a b c. (a -> b -> c) -> CB2 a b c
-mkCB2 = CB2 <<< mkFn2
+wrap2 :: forall a b c. (a -> b -> c) -> CB2 a b c
+wrap2 = CB2 <<< mkFn2
 
 instance encodeCB1 :: (Decode a, Encode b) => Encode (CB1 a b) where
   encode (CB1 f) = toForeign \a -> encode $ f $ unsafeDecode a

@@ -21,11 +21,11 @@ decodeFunc1 f = Func1 $ \a -> decode $ (unsafeFromForeign f) (encode a)
 decodeFunc2 :: forall a b c. Encode a => Encode b => Decode c => Foreign -> Func2 a b c
 decodeFunc2 f = Func2 $ mkFn2 \a b -> decode $ runFn2 (unsafeFromForeign f) (encode a) (encode b)
 
-mkFunc1 :: forall a b. Encode a => Decode b => Foreign -> (a -> Either MultipleErrors b)
-mkFunc1 f = \a -> runExcept (un Func1 (decodeFunc1 f) a)
+wrap1 :: forall a b. Encode a => Decode b => Foreign -> (a -> Either MultipleErrors b)
+wrap1 f = \a -> runExcept (un Func1 (decodeFunc1 f) a)
 
-mkFunc2 :: forall a b c. Encode a => Encode b => Decode c => Foreign -> (a -> b -> Either MultipleErrors c)
-mkFunc2 f = \a b -> runExcept (runFn2 (un Func2 (decodeFunc2 f)) a b)
+wrap2 :: forall a b c. Encode a => Encode b => Decode c => Foreign -> (a -> b -> Either MultipleErrors c)
+wrap2 f = \a b -> runExcept (runFn2 (un Func2 (decodeFunc2 f)) a b)
 
 instance func1Decode :: (Encode a, Decode b) => Decode (Func1 a b) where
   decode f = pure (decodeFunc1 f)
